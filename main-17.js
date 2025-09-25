@@ -17,22 +17,22 @@ if (6 % 2 === 0) {
 // 4. *Дополнительное задание: перепишите задачу на switch-case.
 
 let age = 65;
-let discount = age < 18 ? 10 : age > 18 && age <= 65 ? 20 : 30;
+let discount = age < 18 ? 10 : age <= 65 ? 20 : 30;
 console.log(`Скидка ${discount}%`);
 
 let discount1 = 16;
 switch (true) {
-  case discount1 < 18:
+  case age < 18:
     discount1 = 10;
     break;
-  case discount1 > 18 && discount1 <= 65:
+  case age > 18 && age <= 65:
     discount1 = 20;
     break;
-  case discount1 > 65:
+  case age > 65:
     discount1 = 30;
     break;
   default:
-    discount1 = 30;
+    discount1 = 0;
 }
 console.log(`Скидка ${discount1}%`);
 // Задача 3.
