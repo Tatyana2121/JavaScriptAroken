@@ -33,16 +33,12 @@ let getTimeOfDay = (num) => {
   switch (true) {
     case num >= 0 && num <= 5:
       return "Ночь";
-      break;
     case num >= 6 && num <= 11:
       return "Утро";
-      break;
     case num >= 12 && num <= 17:
       return "Ночь";
-      break;
     case num >= 18 && num <= 23:
       return "Ночь";
-      break;
     default:
       return "Некорректное время";
   }
