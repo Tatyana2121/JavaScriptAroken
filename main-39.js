@@ -15,23 +15,20 @@ for (let key in person) {
 // Создайте функцию isEmpty, которая проверяет является ли переданный объект пустым. Если объект пуст - верните true, в противном случае false.
 const obj = { };
 
+let isEmpty = (object) => {
+  for (const key in object) {
+      return false
+    } 
+      return true
+}
+
 // let isEmpty = (object) => {
-//   for (const key in object) {
-//     if (!object[key]) {
-//       return "true"
-//     } else {
-//       return "false"
-//     }
+//   if (Object.keys(object).length == 0) {
+//     return true
+//   } else {
+//     return false
 //   }
 // }
-
-let isEmpty = (object) => {
-  if (Object.keys(object).length == 0) {
-    return "true"
-  } else {
-    return "false"
-  }
-}
 console.log(isEmpty(person));
 console.log(isEmpty(obj));
 // Задача 3.
