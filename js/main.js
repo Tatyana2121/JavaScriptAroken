@@ -54,30 +54,49 @@ function editingTodoById(todos, todoId, newText) {
   return todos;
 }
 
-const form = document.querySelector(".form");
-const input = document.querySelector(".input");
-const todosList = document.querySelector(".todos");
+const formElement = document.querySelector(".form");
+const inputElement = document.querySelector(".input");
+const todosElement = document.querySelector(".todos");
 
-function createTodoElement(text) {
-  let createElem = document.createElement("li");
-  createElem.classList.add("todo");
-  createElem.innerHTML = `
-    <div class="todo-text">${text}</div>
+function createTodoElement(todo) {
+  let todoElement = document.createElement("li");
+  todoElement.classList.add("todo");
+  todoElement.dataset.id = todo[todoKeys.id];
+  todoElement.innerHTML = `
+    <div class="todo-text">${todo[todoKeys.text]}</div>
     <div class="todo-actions">
       <button class="button-complete button">&#10004;</button>
       <button class="button-delete button">&#10006;</button>
     </div>
   `;
-  todosList.append(createElem);
+  return todoElement;
 }
 
 function handleCreateTodo(todos, text) {
-  createTodoElement(text);
-  createTodo(todos, text);
+  const todo = createTodo(todos, text);
+  const todoElement = createTodoElement(todo);
+  todosElement.prepend(todoElement);
 }
+// formElement.document.querySelector("submit", handleCreateTodo)
 
-handleCreateTodo(todos, "Задача 1");
-handleCreateTodo(todos, "Задача 2");
+formElement.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const text = inputElement.value.trim();
+  if (!text) return;
+  handleCreateTodo(todos, text);
+  inputElement.value = "";
+});
 
-editingTodoById(todos, 1, "editing");
-console.log(todos);
+todosElement.addEventListener("click", (event) => {
+  const todo = event.target.closest(".todo");
+  if (!todo) return;
+  if (event.target.classList.contains("button-delete")) {
+    deleteTodoById(todos, Number(todo.dataset.id));
+    todo.remove();
+  }
+  if (event.target.classList.contains("button-complete")) {
+    completeTodoById(todos, Number(todo.dataset.id));
+    todo.classList.toggle("completed");
+  }
+  console.dir(event.target);
+});
